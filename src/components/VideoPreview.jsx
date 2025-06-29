@@ -2,8 +2,8 @@ import { gsap } from "gsap";
 import { useState, useRef, useEffect, useLayoutEffect } from "react";
 
 export const VideoPreview = ({ children }) => {
-  const root = useRef(null); // Reference for the root container
-  const glare = useRef(null); // Reference for the glare element
+  const root = useRef(null); 
+  const glare = useRef(null); 
 
   const quickTo = useRef({
     x: null,
@@ -12,16 +12,13 @@ export const VideoPreview = ({ children }) => {
     rotateY: null,
   });
 
-  // Use useLayoutEffect for animations to avoid flicker
+  
   useLayoutEffect(() => {
-    // Initialize the quickTo functions once the component mounts
-    // This is the performant way to handle mouse-following animations
     quickTo.current.x = gsap.quickTo(root.current, "x", { duration: 0.6, ease: "power3" });
     quickTo.current.y = gsap.quickTo(root.current, "y", { duration: 0.6, ease: "power3" });
     quickTo.current.rotateX = gsap.quickTo(root.current, "rotationX", { duration: 0.6, ease: "power3" });
     quickTo.current.rotateY = gsap.quickTo(root.current, "rotationY", { duration: 0.6, ease: "power3" });
 
-    // Cleanup function to kill tweens when the component unmounts
     return () => {
         gsap.killTweensOf(root.current);
     };

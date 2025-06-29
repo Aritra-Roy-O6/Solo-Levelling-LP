@@ -1,3 +1,4 @@
+/* stylelint-disable at-rule-no-unknown */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -335,5 +336,232 @@ body {
   opacity: 1;
 }
 
+/* Add these CSS rules to your existing index.css file */
 
+/* Enhanced video preview animations */
+@keyframes shimmer {
+  0% {
+    background-position: -200% -200%;
+  }
+  50% {
+    background-position: 200% 200%;
+  }
+  100% {
+    background-position: -200% -200%;
+  }
+}
+
+/* Smooth video transitions */
+.video-transition-enter {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.video-transition-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.video-transition-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.video-transition-exit-active {
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Enhanced preview container */
+.preview-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.preview-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s ease-out;
+  z-index: 1;
+}
+
+.preview-container:hover::before {
+  left: 100%;
+}
+
+/* Enhanced video scaling */
+.video-scale-animation {
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Smooth opacity transitions for videos */
+.video-fade {
+  transition: opacity 0.6s ease-in-out;
+  will-change: opacity;
+}
+
+/* Enhanced glare effect */
+.glare-effect {
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 40%, transparent 70%);
+  filter: blur(2px);
+  mix-blend-mode: overlay;
+  transition: opacity 0.3s ease-out, transform 0.2s ease-out;
+}
+
+/* Performance optimizations */
+.video-preview-container {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.video-preview-container video {
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* Loading state animations */
+.video-loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.video-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: loading-shimmer 1.5s infinite ease-in-out;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Enhanced hover states */
+.preview-hover-effect {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.preview-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+/* Micro-interactions */
+.click-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.click-ripple::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.click-ripple.active::after {
+  width: 300px;
+  height: 300px;
+  opacity: 1;
+}
+
+/* Improved text animations */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Video container enhancements */
+.video-container {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-container video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease-out;
+}
+
+.video-container:hover video {
+  transform: scale(1.05);
+}
+
+/* Smooth border animations */
+.animated-border {
+  position: relative;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -2px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+  background-size: 300% 300%;
+  animation: borderAnimation 3s ease-in-out infinite;
+}
+
+@keyframes borderAnimation {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
 

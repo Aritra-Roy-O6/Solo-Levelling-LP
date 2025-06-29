@@ -38,8 +38,15 @@ export const BentoTilt = ({ children, className = "" }) => {
   );
 };
 
-
-export const BentoCard = ({ src, title, description, isComingSoon }) => {
+export const BentoCard = ({
+  src,
+  imgSrc,
+  title,
+  description,
+  isComingSoon,
+  textClassName = "",
+  imgClassName = "",
+}) => {
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [hoverOpacity, setHoverOpacity] = useState(0);
   const hoverButtonRef = useRef(null);
@@ -59,18 +66,30 @@ export const BentoCard = ({ src, title, description, isComingSoon }) => {
 
   return (
     <div className="relative size-full">
-      <video
-        src={src}
-        loop
-        muted
-        autoPlay
-        className="absolute left-0 top-0 size-full object-cover object-center"
-      />
-      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
+      {imgSrc ? (
+        <img
+          src={imgSrc}
+          alt={typeof title === "string" ? title : "Feature image"}
+          className={`absolute left-0 top-0 size-full object-cover object-center ${imgClassName}`}
+        />
+      ) : (
+        <video
+          src={src}
+          loop
+          muted
+          autoPlay
+          className="absolute left-0 top-0 size-full object-cover object-center"
+        />
+      )}
+      <div
+        className={`relative z-10 flex size-full flex-col justify-between p-5 ${textClassName}`}
+      >
         <div>
           <h1 className="bento-title special-font">{title}</h1>
           {description && (
-            <p className="mt-3 max-w-64 text-xs md:text-base">{description}</p>
+            <p className="mt-3 max-w-64 text-xs md:text-base">
+              {description}
+            </p>
           )}
         </div>
 
@@ -115,7 +134,7 @@ const Features = () => (
 
       <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
         <BentoCard
-          src="videos/feature-1.mp4"
+          imgSrc="/img/gallery-2.webp"
           title={
             <>
               sh<b>a</b>dow hunting
@@ -123,6 +142,8 @@ const Features = () => (
           }
           description="A cross-dungeon hunting system, turning your activities across different gates and dungeons into a rewarding adventure."
           isComingSoon
+          textClassName="text-violet-950"
+          imgClassName="animate-slowZoom"
         />
       </BentoTilt>
 
@@ -137,6 +158,8 @@ const Features = () => (
             }
             description="An anime and manhwa-inspired hunter collection - the power primed for expansion."
             isComingSoon
+            textClassName="text-white"
+
           />
         </BentoTilt>
 
@@ -150,6 +173,7 @@ const Features = () => (
             }
             description="A gamified hunter hub, adding a new dimension of power to social interaction for awakened communities."
             isComingSoon
+            textClassName="text-white"
           />
         </BentoTilt>
 
@@ -163,6 +187,7 @@ const Features = () => (
             }
             description="A cross-realm AI Agent - elevating your hunting to be more powerful and efficient."
             isComingSoon
+            textClassName="text-white"
           />
         </BentoTilt>
 
